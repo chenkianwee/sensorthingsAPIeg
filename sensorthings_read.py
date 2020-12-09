@@ -11,4 +11,7 @@ auth_pass = ''
 # get = requests.get(url+"Things", auth=HTTPBasicAuth(auth_user, auth_pass))
 get = requests.get(url+"Things", auth=HTTPBasicAuth(auth_user, auth_pass))
 content = get.json()
-print(content['value'][0])
+for thing in content['value']:
+    print('=======================================================================================================')
+    print('')
+    print(thing)
