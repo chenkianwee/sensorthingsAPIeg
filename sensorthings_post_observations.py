@@ -5,7 +5,7 @@ import random
 import requests
 from requests.auth import HTTPBasicAuth
 
-url = ''
+url = 'https://andlchaos300l.princeton.edu:8080/FROST-Server/v1.0/'
 auth_user = ''
 auth_pass = ''
 
@@ -13,8 +13,8 @@ auth_pass = ''
 #DATASTREAMS ID
 #==========================================================================================================================================================
 #if you do not have the datastream IDs, run the sensorthings_register.py script to obtain the necessary ids for running this script.
-ds_id = 13
-mds_id = 234
+ds_id = 12
+mds_id = 21
 #==========================================================================================================================================================
 #==========================================================================================================================================================
 loop = True
@@ -37,6 +37,7 @@ while loop == True:
     utc_dt = datetime.datetime.now(datetime.timezone.utc) # UTC time
     dt = utc_dt.astimezone() # local time
     dtstr = dt.strftime('%Y-%m-%dT%H:%M:%S%z')
+    print(dtstr)
     
     #post the datastream
     obs_data['phenomenonTime'] = dtstr
@@ -57,7 +58,8 @@ while loop == True:
     r2 = requests.post(url+"CreateObservations", 
                   auth=HTTPBasicAuth(auth_user, auth_pass), 
                   json=arrayobs)
-    print(r1.headers['location'])
+    print(r1.headers)
+    # print(r1.headers['location'])
     print(r2.text)
     #make a post every 5s
     time.sleep(5)

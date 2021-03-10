@@ -1,7 +1,7 @@
 import requests
 from requests.auth import HTTPBasicAuth
 
-url = ''
+url = 'https://andlchaos300l.princeton.edu:8080/FROST-Server/v1.0/'
 auth_user = ''
 auth_pass = ''
 

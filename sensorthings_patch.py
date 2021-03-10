@@ -1,14 +1,22 @@
 import requests
 from requests.auth import HTTPBasicAuth
 
-url = ''
+url = 'https://andlchaos300l.princeton.edu:8080/FROST-Server/v1.0/'
 auth_user = ''
 auth_pass = ''
 
 
 things_json = {'description': 'changed2'}
 
-r = requests.patch(url+"Things(53610)", auth=HTTPBasicAuth(auth_user, auth_pass), 
-                  json=things_json, verify=False)
+ds_json = {"unitOfMeasurement": {
+                                    "name": "g/kg",
+                                    "symbol": "g/kg",
+                                    "definition": "the amount of grams in a kg of air"
+                                }
+            }
 
-print(r.headers)
+
+r = requests.patch(url+"Datastreams(14)", auth=HTTPBasicAuth(auth_user, auth_pass), 
+                  json=ds_json, verify=True)
+
+print(r.text)
