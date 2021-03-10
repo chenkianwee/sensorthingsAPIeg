@@ -1,16 +1,16 @@
 import requests
 from requests.auth import HTTPBasicAuth
 
-url = ''
+url = 'https://andlchaos300l.princeton.edu:8080/FROST-Server/v1.0/'
 auth_user = ''
 auth_pass = ''
 
 #========================================================================
 #observed property
 #========================================================================
-observed_prop1 = {"name": "Temperature",
-                 "description": "The temperature at the position",
-                 "definition": "https://en.wikipedia.org/wiki/Celsius"
+observed_prop1 = {"name": "Flow rate",
+                 "description": "The fluid flow rate at the point",
+                 "definition": "https://en.wikipedia.org/wiki/Volumetric_flow_rate"
                  }
 
 r1 = requests.post(url+"ObservedProperties", 
@@ -22,17 +22,11 @@ print(r1)
 #========================================================================
 #sensor
 #========================================================================
-sensor_data1 = {"name": "Temp Sensor1",
-               "description": "Description of the Sensor Hardware",
-               "encodingType": "Application/pdf",
-               "metadata": "https://cdn-shop.adafruit.com/datasheets/DHT22.pdf"
-               }   
-
-sensor_data2 = {"name": "Light Sensor1",
-               "description": "Description of the Sensor Hardware",
-               "encodingType": "Application/pdf",
-               "metadata": "https://cdn-shop.adafruit.com/datasheets/DHT22.pdf"
-               }   
+sensor_data1 = {"name": "Generic Flow Meter",
+               "description": "Use this flow meter if unsure of the exact sensor",
+               "encodingType": "string",
+               "metadata": "generic flow meter"
+               }
 
 r1 = requests.post(url+"Sensors", 
                   auth=HTTPBasicAuth(auth_user, auth_pass), 
