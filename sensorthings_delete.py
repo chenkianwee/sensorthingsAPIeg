@@ -8,12 +8,8 @@ auth_pass = ''
 #========================================================================
 #thing + location
 #========================================================================
-for i in range(1):
-    sid = str(33)
-    delete = requests.delete(url+"Things(" + sid + ")", auth=HTTPBasicAuth(auth_user, auth_pass))
-    content = delete.content
-    print(content)
-
-# delete = requests.delete(url+"Things(53648)", auth=HTTPBasicAuth(auth_user, auth_pass))
-# content = delete.content
-# print(content)
+obj = "Things"
+idx = "33"
+delete = requests.delete(url+ obj + "(" + idx + ")", auth=HTTPBasicAuth(auth_user, auth_pass))
+content = delete.content
+print(content)
