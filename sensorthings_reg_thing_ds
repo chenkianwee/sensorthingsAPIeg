@@ -1,44 +1,45 @@
 import requests
 from requests.auth import HTTPBasicAuth
 
-url = 'https://andlchaos300l.princeton.edu:8080/FROST-Server/v1.0/'
-auth_user = ''
-auth_pass = ''
+# url = 'http://chaosbox.princeton.edu:8080/FROST-Server/v1.0/'
+url = 'http://192.168.1.243:8080/FROST-Server/v1.0/'
+auth_user = 'admin'
+auth_pass = 'admin'
 #==========================================================================================================================================================
 #Fill in the parameters, #The sensorthings API data model is used (https://developers.sensorup.com/docs/#introduction)
 #==========================================================================================================================================================
 #THING PARAMETERS
 #==========================================================================================================================================================
-thing_name = 'B70_COND_FLOW'
-thingDesc = 'The flow of condensate from Chem to Arch Lab'#describe the deployment
+thing_name = 'test2'
+thingDesc = 'describe the thing 1'#describe the deployment
 pins = ''#describe the pins connection on the particle device
 #==========================================================================================================================================================
 #LOCATION PARAMETERS
 #==========================================================================================================================================================
-locName = 'Arch Lab'
-locDesc = 'Mech room in Arch Lab'
+locName = 'myhome'
+locDesc = 'on the table'
 loc_encoding_type = 'application/vnd.geo+json'
 #Define the geometry of the location. Geometry types from geojson is accepted. Refer to https://tools.ietf.org/html/rfc7946 for geometry types.
 loc_type = 'Point'
-coordinates = [-74.649933,40.343601,0] #0,0,0 lon/kat/alt is the coordinates of null island, this is just a place holder
+coordinates = [0,0,0] #0,0,0 lon/kat/alt is the coordinates of null island, this is just a place holder
 #==========================================================================================================================================================
 #DATASTREAM PARAMETERS
 #==========================================================================================================================================================
-ds_name = 'condensate flow'
-ds_desc = 'the flow of condensate from chem to Arch Lab'
-obs_type = 'http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement'
+ds_name = 'some number'
+ds_desc = 'random numbers'
+obs_type = 'random generated'
 #http://defs.opengis.net/elda-common/ogc-def/resource?uri=http://www.opengis.net/def/observationType/OGC-OM/2.0/&_format=html
-ds_uom = {"name": "gallons per minute",
-          "symbol": "gal/min",
-          "definition": "http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#GallonUSPerMinute"}
+ds_uom = {"name": "unitless",
+          "symbol": "nil",
+          "definition": "define"}
 #visit "http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html" to get the definition
 
 #id of the observed property, go to  http://chaosbox.princeton.edu:8080/FROST-Server/v1.0/ObservedProperties to check the properties availabe and specify the @iot.id
 #if properties are not available you will have to register a new property
-ds_obs_prop_id = 4
+ds_obs_prop_id = 1
 #id of the sensor, go to http://chaosbox.princeton.edu:8080/FROST-Server/v1.0/Sensors to check the sensors availabe and specify the @iot.id
 #if sensors are not available you will have to register a new property 
-ds_sensor_id = 4
+ds_sensor_id = 1
 
 #==========================================================================================================================================================
 #FUNCTIONS
@@ -84,6 +85,7 @@ filter_thing = "Things?$filter=name eq '" + thing_name + "'&$expand=Locations($s
 find_thing = requests.get(url+filter_thing)
 thing_content = find_thing.json()
 thing_ls = thing_content['value']
+print(thing_content)
 nthings = len(thing_ls)
 if nthings > 0:
     loc_name_val = thing_ls[0]['Locations'][0]['name']
@@ -93,7 +95,7 @@ if nthings > 0:
 if is_thing_reg == False:
     r = requests.post(url+"Things",auth=HTTPBasicAuth(auth_user,auth_pass),
                       json=thingloc_data)
-    
+    print(r.text)
     loc_str = r.headers['Location']
     thing_id = get_id_from_header(loc_str)
     
@@ -112,6 +114,7 @@ if nds == 0:
     dr = requests.post(url+"Datastreams", 
                       auth=HTTPBasicAuth(auth_user,auth_pass),
                       json=datastream_data)
+    print('datastream', dr.text)
     ds_loc_str = dr.headers['Location'] 
     ds_id = get_id_from_header(ds_loc_str )
 else:

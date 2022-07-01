@@ -5,15 +5,15 @@ import random
 import requests
 from requests.auth import HTTPBasicAuth
 
-url = 'https://andlchaos300l.princeton.edu:8080/FROST-Server/v1.0/'
-auth_user = ''
-auth_pass = ''
+url = 'http://192.168.1.243:8080/FROST-Server/v1.0/'
+auth_user = 'admin'
+auth_pass = 'admin'
 
 #==========================================================================================================================================================
 #DATASTREAMS ID
 #==========================================================================================================================================================
 #if you do not have the datastream IDs, run the sensorthings_register.py script to obtain the necessary ids for running this script.
-ds_id = 12
+ds_id = 2
 mds_id = 21
 #==========================================================================================================================================================
 #==========================================================================================================================================================
@@ -47,23 +47,23 @@ while loop == True:
     r1 = requests.post(url+"Observations", 
                       auth=HTTPBasicAuth(auth_user, auth_pass), 
                       json=obs_data)
+    print(r1.text)
+    # #post the multiobservation
+    # res2 = random.random()
+    # res3 = random.random()
+    # arrayobs[0]['dataArray'][0][0] = dtstr
+    # arrayobs[0]['dataArray'][0][1] = dtstr
+    # arrayobs[0]['dataArray'][0][2] = [res2, res3]
     
-    #post the multiobservation
-    res2 = random.random()
-    res3 = random.random()
-    arrayobs[0]['dataArray'][0][0] = dtstr
-    arrayobs[0]['dataArray'][0][1] = dtstr
-    arrayobs[0]['dataArray'][0][2] = [res2, res3]
-    
-    r2 = requests.post(url+"CreateObservations", 
-                  auth=HTTPBasicAuth(auth_user, auth_pass), 
-                  json=arrayobs)
-    print(r1.headers)
-    # print(r1.headers['location'])
-    print(r2.text)
-    #make a post every 5s
+    # # r2 = requests.post(url+"CreateObservations", 
+    # #               auth=HTTPBasicAuth(auth_user, auth_pass), 
+    # #               json=arrayobs)
+    # print(r1.headers)
+    # # print(r1.headers['location'])
+    # print(r2.text)
+    # #make a post every 5s
     time.sleep(5)
-    cnt+=1
-    #to make an infinity loop just remove this line
-    if cnt == 5:
-        loop = False
+    # cnt+=1
+    # #to make an infinity loop just remove this line
+    # if cnt == 5:
+    #     loop = False
