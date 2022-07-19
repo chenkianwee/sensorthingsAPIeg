@@ -2,8 +2,8 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 url = 'https://andlchaos300l.princeton.edu:8080/FROST-Server/v1.0/'
-auth_user = 'chaos'
-auth_pass = 'Zer0exergy'
+auth_user = ''
+auth_pass = ''
 
 obj = 'Datastreams'
 idx = '29'

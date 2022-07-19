@@ -6,8 +6,8 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 url = 'http://192.168.1.243:8080/FROST-Server/v1.0/'
-auth_user = 'admin'
-auth_pass = 'admin'
+auth_user = ''
+auth_pass = ''
 
 #==========================================================================================================================================================
 #DATASTREAMS ID
